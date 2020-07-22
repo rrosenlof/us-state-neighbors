@@ -1,50 +1,28 @@
 import csv
+import linkedlistapi
 
 states = []
 
-# with open('borders.csv', newline='') as csvfile:
-#     borders = csv.reader(csvfile, delimiter=',', quotechar='|')
-#     for row in borders:
-#         # print(', '.join(row))
-#         print(row[2])
-#         for border in row[2].split('/'):
-#             states.append([row[1],border])
-
-# with open('all_borders.csv', 'w', newline='') as csvfile:
-#     border_writer = csv.writer(csvfile, delimiter=',',
-#                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
-#     border_writer.writerows(states)
-
-
-
-
-def main():
-    border_paths = []
-
+def main(state1, state2):
+    lists = []
+    found = False
     border_dict = create_dict()     
 
-    with open('borders.csv', newline='') as csvfile:
-        borders = csv.reader(csvfile, delimiter=',', quotechar='|')
-        borders = list(borders)
-        i = 0
-        while i < len(borders):
-            j = 0
-            while j < len(borders):
-                # print(borders[i][1], borders[j][1])
-
-                state1 = borders[i][1]
-                state2 = borders[j][1]
-                dist = 0
-
-                if state1 == state2:
-                    border_paths.append([state1,state2,dist])
+    with open('neighbors.csv', newline='') as csvfile:
+        neighbors = csv.reader(csvfile, delimiter=',', quotechar='|')
+        l_list = linkedlistapi.LinkedList()
+        l_list.add(state1)
+        while l_list.get(l_list.size-1) != state2:
+            for neighbor in neighbors:
+                if neighbor[0] == state1 and neighbor[1] == state2:
+                    print(neighbor)
+                    l_list.add(neighbor[1])
+                    break
                 else:
-                    for obj in find_borders(state1,state2,border_dict):
-                        print(obj)
-                        border_paths.append(obj)
-                    # border_paths.append(res)
-                j += 1
-            i += 1
+                    print('else block')
+        l_list.debug_print()
+        
+
         
     # print(border_paths)
 
@@ -65,7 +43,13 @@ def find_borders(state1, state2, border_dict, dist=1,index=0):
         if border == state2:
             yield ([state1, state2, dist])
     yield from find_borders(border_dict[state1].split('/')[index],state2,border_dict,dist+1,index+1)
+
+
+def find(neighbor, state2, neighbors):
+    return
+        
+
       
 
-main()
+main('Alabama', 'Florida')
     
