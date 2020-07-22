@@ -25,6 +25,10 @@ Column Name | Description
 **INVERSE_PATH** | Same as path, but in opposite direction
 **DISTANCE** | Number of states from starting state to ending state, ending state inclusive
 
+##### All_paths.csv
+
+Same as paths, but a row for each state to every other state
+
 ##### Main.py
 
 Some scripts for trying to programatically create the `paths.csv` file. Conclusion: too complicated... I made `paths.csv` by hand mostly. More to come here maybe...
@@ -35,7 +39,7 @@ For making linked lists, trying to create the paths
 
 ##### Words.py
 
-Prints out the paths which are words
+Some testing functions
 
 ### Assumptions:
 
